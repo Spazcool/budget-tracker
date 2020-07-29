@@ -1,14 +1,14 @@
-// all of the static assets (JS, HTML, CSS, Images) we want to cache for offline use
+// ball of the static assets (JS, HTML, CSS, Images) we want to cache for offline use
 const FILES_TO_CACHE = [
-  "/",
-  "../html/index.html",
-  "../css/style.css",
-  "../css/bootstrap.min.css",
-  "manifest.webmanifest",
-  "../index.js",
-  "../bootstrap.min.js",
-  "../images/favicon.ico",
-  "../images/icons/icon-512x512.png",
+  // "/",
+  "index.html",
+  // "../css/style.css",
+  // "../css/bootstrap.min.css",
+  // "../js/manifest.webmanifest",
+  // "../index.js",
+  // "../js/bootstrap.min.js",
+  // "../images/favicon.ico",
+  // "../images/icons/icon-512x512.png",
 ];
 
 // the name of the cache we are going to use for storing our static assets
@@ -114,8 +114,11 @@ self.addEventListener("fetch", function(evt) {
   evt.respondWith(
     // open up the static cache, and once that is open
     caches.open(CACHE_NAME).then(cache => {
+      console.log('request', evt.request)
+      console.log(cache)
       // check if the item we are trying to fetch is in the cache
       return cache.match(evt.request).then(response => {
+        console.log('resposne', response)
         // if the cache returned a response, return that, otherwise actually
         // fetch the resource from the server
         return response || fetch(evt.request);

@@ -1,8 +1,41 @@
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js', { scope: '/' })
+    .then((reg) => {
+      if(reg.installing) {
+        console.log('Service worker installing');
+      } else if(reg.waiting) {
+        console.log('Service worker installed');
+      } else if(reg.active) {
+        console.log('Service worker active');
+      }
+      return navigator.serviceWorker.ready;
+    })
+    // .then(() => {
+    //   navigator.serviceWorker.addEventListener('message', event => {
+    //     // event is a MessageEvent object
+    //     console.log(`The service worker sent me a message: ${event.data}`);
+    //   });
+    // })
+    
+    // .then((registration) => {
+    //   document.getElementById('add-btn').addEventListener('click', (event) => {
+    //     registration.sync.register('add-later')
+    //     .catch(function(err) {
+    //         return err;
+    //     })
+    //   })
+    // })
+    .catch((error) => {
+      console.log('Registration failed with ' + error);
+    });
+}
+
 let transactions = [];
 let myChart;
 
 fetch("/api/transaction")
   .then(response => {
+    console.log(response)
     return response.json();
   })
   .then(data => {
@@ -111,7 +144,11 @@ function sendTransaction(isAdding) {
   populateChart();
   populateTable();
   populateTotal();
-  
+      
+  navigator.serviceWorker.ready.then( registration => {
+    registration.active.postMessage(transaction);
+  });
+
   // also send to server
   fetch("/api/transaction", {
     method: "POST",

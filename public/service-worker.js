@@ -5,6 +5,7 @@ const FILES_TO_CACHE = [
   'bootstrap.min.css',
   'manifest.webmanifest',
   'index.js',
+  'db.js',
   'bootstrap.min.js',
   './images/favicon.ico',
   './images/icons/icon-512x512.png',
@@ -20,18 +21,17 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
+  const currentCaches = [CACHE_NAME, DATA_CACHE_NAME];
   event.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
-          console.log('Removing old cache data', key);
-          return caches.delete(key);
-        }
+    caches.keys().then(cacheNames => {
+      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+    }).then(cachesToDelete => {
+      return Promise.all(cachesToDelete.map(cacheToDelete => {
+        return caches.delete(cacheToDelete);
       }));
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 //todo bug only fires on reload, initial load is not getting pushed to cache
@@ -81,46 +81,3 @@ self.addEventListener('fetch', (event) => {
     }
   }));
 });
-
-// self.addEventListener('message', event => {
-//   // event is an ExtendableMessageEvent object
-//   console.log(`The client sent me a message:`);
-//   console.log(event.data)
-
-//   event.source.postMessage("Hi client");
-// });
-
-// self.onsync = (event) => {
-//   if(event.tag == 'add-later') {
-//     console.log('????')
-//     console.log(event)
-//     event.waitUntil(sendTransaction(true));
-//   }
-// }
-
-// function sendToServer(){
-//   fetch("/api/transaction")
-//   .then(response => {
-//     return response.json();
-//   })
-//   .then(data => {
-//     // save db data on global variable
-//     transactions = data;
-
-//     populateTotal();
-//     populateTable();
-//     populateChart();
-//   });
-// }
-
-// function store(){
-//   var newPost = ""; // Inputted values
-//   // Iterate through the inputs
-//   $("input").each(function() {
-//       newPost += $(this).val() + ",";
-//   });
-//   // Get rid of the last comma
-//   newPost = newPost.substr(0, newPost.length - 1);
-//   // Store the data
-//   localStorage.setItem('newPost', newPost);
-// }

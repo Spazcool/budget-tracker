@@ -1,39 +1,23 @@
 {
-  "name": "budget-app",
+  "name": "budget-tracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "A budget tracker app to quickly & easily track your money.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "lite-server": "lite-server",
-    "build": "webpack"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coding-boot-camp/unit18hw.git"
+    "url": "git+https://github.com/Spazcool/budget-tracker.git"
   },
-  "author": "",
+  "author": "Douglas Wright",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/coding-boot-camp/unit18hw/issues"
-  },
-  "homepage": "https://github.com/coding-boot-camp/unit18hw#readme",
+  "homepage": "",
   "dependencies": {
-    "bootstrap": "^4.5.0",
-    "chart.js": "^2.9.3",
     "compression": "^1.7.4",
     "express": "^4.17.1",
-    "lite-server": "^2.5.3",
     "mongoose": "^5.5.15",
-    "morgan": "^1.9.1",
-    "webpack-pwa-manifest": "^4.2.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "babel-loader": "^8.0.6",
-    "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2"
+    "morgan": "^1.9.1"
   }
 }

@@ -1,32 +1,51 @@
-# Unit 18 PWA Homework: Online/Offline Budget Trackers
-Giving users a fast and easy way to track their money is important, but allowing them to access that information anytime is even more important. Having offline functionality is paramount to our applications success.
+# Budget Tracker (PWA)
+A budget tracker app to quickly & easily track your money, both online and offline by leveraging PWA technologies (e.g. service workers & indexedDB). Powered with a Node backend running an Express server & pulling data from a NoSQL DB using the Mongoose ORM.
 
-Add functionality to our existing Budget Tracker application to allow for offline access and functionality.
+<p align="center">
+   <img width="70%" height="300vh" src="./public/images/desktop.gif">
+   <img width="20%" height="300vh" src="./public/images/mobile.gif">
+</p>
 
-The user will be able to add expenses and deposits to their budget with or without a connection. When entering transactions offline, they should populate the total when brought back online.
+## Getting Started Remotely
+Play on the hosted [site](https://bud-get-track-er.herokuapp.com/).
+Or checkout the code in the [repo](https://github.com/Spazcool/budget-tracker).
 
-Offline Functionality:
+## Getting Started Locally
+### Prerequisites
+* Node
+* Mongo
 
-  * Enter deposits offline
+### Instructions
+1. Clone
+```bash
+git clone https://github.com/Spazcool/budget-tracker.git
+```
+2. Install dependencies
+```bash
+npm install
+```
+3. Run
+```bash
+node server
+```
 
-  * Enter expenses offline
+## Built With
 
-When brought back online:
+* JS
+  * Node
+  * Express
+  * Mongoose
+  * IndexedDB
+* DB
+  * Mongo
+* HTML
+* CSS
+  * Bootstrap
 
-  * Offline entries should be added to tracker.
+## Authors
 
-## Acceptance Criteria
-GIVEN a user is on Budget App without an internet connection
-WHEN the user inputs a withdrawal or deposit
-THEN that will be shown on the page, and added to their transaction history when their connection is back online.
+* **Douglas Wright** - [Spazcool](https://github.com/Spazcool)
 
-- - -
+## License
 
-## Submission on BCS
-
-* You are required to submit the following:
-
-  * the URL to the deployed application
-
-  * the URL to the Github repository
-
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
